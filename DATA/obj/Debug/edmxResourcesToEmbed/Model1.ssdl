@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="igroup196_prodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="clientNumber" />
+    </Key>
+    <Property Name="clientNumber" Type="int" Nullable="false" />
+    <Property Name="clientName" Type="nvarchar" MaxLength="30" />
+    <Property Name="clientAddress" Type="nvarchar" MaxLength="70" />
+    <Property Name="clientEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="clientFirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="clientLastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="clientPhoneNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="representiveEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="isClientActive" Type="bit" />
+    <Property Name="employee_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="employee_id" />
+    </Key>
+    <Property Name="employee_id" Type="int" Nullable="false" />
+    <Property Name="employee_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="employee_familyname" Type="nvarchar" MaxLength="50" />
+    <Property Name="employee_pw" Type="nvarchar" MaxLength="50" />
+    <Property Name="employee_gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="employee_PhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="employee_email" Type="nvarchar" MaxLength="50" />
+    <Property Name="employee_startDate" Type="datetime" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="employee_picture" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Employee_Position_Junction">
+    <Key>
+      <PropertyRef Name="employee_id" />
+      <PropertyRef Name="positionNum" />
+    </Key>
+    <Property Name="employee_id" Type="int" Nullable="false" />
+    <Property Name="positionNum" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeePosition">
+    <Key>
+      <PropertyRef Name="positionNum" />
+    </Key>
+    <Property Name="positionNum" Type="int" Nullable="false" />
+    <Property Name="positionName" Type="nvarchar" MaxLength="70" />
+    <Property Name="positionType" Type="nvarchar" MaxLength="70" />
+    <Property Name="positionStartDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="GreenConstraints">
+    <Key>
+      <PropertyRef Name="constraintSerialNum" />
+    </Key>
+    <Property Name="constraintSerialNum" Type="int" Nullable="false" />
+    <Property Name="constraintName" Type="nvarchar" MaxLength="70" />
+    <Property Name="constraintStartDate" Type="datetime" />
+    <Property Name="constraintEndDate" Type="datetime" />
+    <Property Name="constraintNotes" Type="nvarchar" MaxLength="150" />
+    <Property Name="employee_id" Type="int" />
+  </EntityType>
+  <EntityType Name="GreenEvents">
+    <Key>
+      <PropertyRef Name="eventSerialNum" />
+    </Key>
+    <Property Name="eventSerialNum" Type="int" Nullable="false" />
+    <Property Name="event_name" Type="nvarchar" MaxLength="70" />
+    <Property Name="event_address" Type="nvarchar" MaxLength="50" />
+    <Property Name="event_startdate" Type="datetime" />
+    <Property Name="event_enddate" Type="datetime" />
+    <Property Name="isEventActive" Type="bit" />
+    <Property Name="event_notes" Type="nvarchar" MaxLength="150" />
+    <Property Name="employee_id" Type="int" />
+    <Property Name="clientNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="InventoryCategories">
+    <Key>
+      <PropertyRef Name="categorySerialNum" />
+    </Key>
+    <Property Name="categorySerialNum" Type="int" Nullable="false" />
+    <Property Name="categoryName" Type="nvarchar" MaxLength="70" />
+    <Property Name="categoryNotes" Type="nvarchar" MaxLength="70" />
+    <Property Name="categoryCreationDate" Type="datetime" />
+    <Property Name="employee_id" Type="int" />
+  </EntityType>
+  <EntityType Name="InventoryItems">
+    <Key>
+      <PropertyRef Name="itemSerialNum" />
+    </Key>
+    <Property Name="itemSerialNum" Type="int" Nullable="false" />
+    <Property Name="itemName" Type="nvarchar" MaxLength="70" />
+    <Property Name="itemDescription" Type="nvarchar" MaxLength="150" />
+    <Property Name="itemAmount" Type="int" />
+    <Property Name="employee_id" Type="int" />
+    <Property Name="itemPicture" Type="nvarchar" MaxLength="500" />
+    <Property Name="eventSerialNum" Type="int" />
+    <Property Name="offerSerialNum" Type="int" />
+  </EntityType>
+  <EntityType Name="Logs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Timestamp" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Level" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Exception" Type="nvarchar(max)" />
+    <Property Name="Properties" Type="xml" />
+  </EntityType>
+  <EntityType Name="PriceOffer">
+    <Key>
+      <PropertyRef Name="offerSerialNum" />
+    </Key>
+    <Property Name="offerSerialNum" Type="int" Nullable="false" />
+    <Property Name="offerFirstname" Type="nvarchar" MaxLength="50" />
+    <Property Name="offerLastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="offerPhoneNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="offerClientName" Type="nvarchar" MaxLength="50" />
+    <Property Name="offerclientNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="offercompanyAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="offerEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="offerEventCity" Type="nvarchar" MaxLength="50" />
+    <Property Name="offerEventAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="offerEventDate" Type="date" />
+    <Property Name="offerEventStartTime" Type="time" Precision="7" />
+    <Property Name="offerEventEndTime" Type="time" Precision="7" />
+    <Property Name="offerPickUpOrDelivery" Type="bit" />
+    <Property Name="offerNotes" Type="nvarchar" MaxLength="150" />
+    <Property Name="employee_id" Type="int" />
+    <Property Name="eventSerialNum" Type="int" />
+  </EntityType>
+  <EntityType Name="RecommandPurchaseItems">
+    <Key>
+      <PropertyRef Name="serialRecommandNum" />
+    </Key>
+    <Property Name="serialRecommandNum" Type="int" Nullable="false" />
+    <Property Name="recommandItemName" Type="nvarchar" MaxLength="70" />
+    <Property Name="recommandedAmount" Type="int" />
+    <Property Name="recommandDate" Type="datetime" />
+    <Property Name="itemSerialNum" Type="int" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="businessNumber" />
+    </Key>
+    <Property Name="businessNumber" Type="int" Nullable="false" />
+    <Property Name="companyAddress" Type="nvarchar" MaxLength="70" />
+    <Property Name="companyEmail" Type="nvarchar" MaxLength="70" />
+    <Property Name="repName" Type="nvarchar" MaxLength="70" />
+    <Property Name="repLastName" Type="nvarchar" MaxLength="70" />
+    <Property Name="repEmailAddress" Type="nvarchar" MaxLength="70" />
+    <Property Name="StartWorkDate" Type="datetime" />
+    <Property Name="isSupplierActive" Type="bit" />
+    <Property Name="employee_id" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="VehicleList">
+    <Key>
+      <PropertyRef Name="licensePlateNum" />
+    </Key>
+    <Property Name="licensePlateNum" Type="int" Nullable="false" />
+    <Property Name="vehicleType" Type="nvarchar" MaxLength="50" />
+    <Property Name="vehicleColor" Type="nvarchar" MaxLength="50" />
+    <Property Name="licenseType" Type="nvarchar" MaxLength="50" />
+    <Property Name="vehicleOwnership" Type="nvarchar" MaxLength="50" />
+    <Property Name="manufacturingYear" Type="nvarchar" MaxLength="50" />
+    <Property Name="employee_id" Type="int" />
+    <Property Name="eventSerialNum" Type="int" />
+  </EntityType>
+  <EntityType Name="VehicleMaintenance">
+    <Key>
+      <PropertyRef Name="maintenance_id" />
+    </Key>
+    <Property Name="maintenance_id" Type="int" Nullable="false" />
+    <Property Name="maintenance_date" Type="date" />
+    <Property Name="maintenance_description" Type="nvarchar" MaxLength="200" />
+    <Property Name="garageName" Type="nvarchar" MaxLength="30" />
+    <Property Name="vehicle_id_fk" Type="int" />
+  </EntityType>
+  <Association Name="FK__Customers__emplo__286302EC">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___emplo__36B12243">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Employee_Position_Junction" Type="Self.Employee_Position_Junction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="Employee_Position_Junction">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___posit__37A5467C">
+    <End Role="EmployeePosition" Type="Self.EmployeePosition" Multiplicity="1" />
+    <End Role="Employee_Position_Junction" Type="Self.Employee_Position_Junction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePosition">
+        <PropertyRef Name="positionNum" />
+      </Principal>
+      <Dependent Role="Employee_Position_Junction">
+        <PropertyRef Name="positionNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GreenCons__emplo__31EC6D26">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="GreenConstraints" Type="Self.GreenConstraints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="GreenConstraints">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GreenEven__clien__2C3393D0">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="GreenEvents" Type="Self.GreenEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="clientNumber" />
+      </Principal>
+      <Dependent Role="GreenEvents">
+        <PropertyRef Name="clientNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GreenEven__emplo__2B3F6F97">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="GreenEvents" Type="Self.GreenEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="GreenEvents">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__emplo__3E52440B">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="InventoryItems" Type="Self.InventoryItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="InventoryItems">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__emplo__4316F928">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="InventoryCategories" Type="Self.InventoryCategories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="InventoryCategories">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__event__3F466844">
+    <End Role="GreenEvents" Type="Self.GreenEvents" Multiplicity="0..1" />
+    <End Role="InventoryItems" Type="Self.InventoryItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GreenEvents">
+        <PropertyRef Name="eventSerialNum" />
+      </Principal>
+      <Dependent Role="InventoryItems">
+        <PropertyRef Name="eventSerialNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__offer__403A8C7D">
+    <End Role="PriceOffer" Type="Self.PriceOffer" Multiplicity="0..1" />
+    <End Role="InventoryItems" Type="Self.InventoryItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PriceOffer">
+        <PropertyRef Name="offerSerialNum" />
+      </Principal>
+      <Dependent Role="InventoryItems">
+        <PropertyRef Name="offerSerialNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PriceOffe__emplo__3A81B327">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="PriceOffer" Type="Self.PriceOffer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="PriceOffer">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PriceOffe__event__3B75D760">
+    <End Role="GreenEvents" Type="Self.GreenEvents" Multiplicity="0..1" />
+    <End Role="PriceOffer" Type="Self.PriceOffer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GreenEvents">
+        <PropertyRef Name="eventSerialNum" />
+      </Principal>
+      <Dependent Role="PriceOffer">
+        <PropertyRef Name="eventSerialNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Recommand__itemS__45F365D3">
+    <End Role="InventoryItems" Type="Self.InventoryItems" Multiplicity="0..1" />
+    <End Role="RecommandPurchaseItems" Type="Self.RecommandPurchaseItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryItems">
+        <PropertyRef Name="itemSerialNum" />
+      </Principal>
+      <Dependent Role="RecommandPurchaseItems">
+        <PropertyRef Name="itemSerialNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Supplier__employ__2F10007B">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VehicleLi__emplo__48CFD27E">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="VehicleList" Type="Self.VehicleList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="VehicleList">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VehicleLi__event__49C3F6B7">
+    <End Role="GreenEvents" Type="Self.GreenEvents" Multiplicity="0..1" />
+    <End Role="VehicleList" Type="Self.VehicleList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GreenEvents">
+        <PropertyRef Name="eventSerialNum" />
+      </Principal>
+      <Dependent Role="VehicleList">
+        <PropertyRef Name="eventSerialNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VehicleMa__vehic__4CA06362">
+    <End Role="VehicleList" Type="Self.VehicleList" Multiplicity="0..1" />
+    <End Role="VehicleMaintenance" Type="Self.VehicleMaintenance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleList">
+        <PropertyRef Name="licensePlateNum" />
+      </Principal>
+      <Dependent Role="VehicleMaintenance">
+        <PropertyRef Name="vehicle_id_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="igroup196_prodModelStoreContainer">
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Position_Junction" EntityType="Self.Employee_Position_Junction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeePosition" EntityType="Self.EmployeePosition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GreenConstraints" EntityType="Self.GreenConstraints" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GreenEvents" EntityType="Self.GreenEvents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InventoryCategories" EntityType="Self.InventoryCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InventoryItems" EntityType="Self.InventoryItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PriceOffer" EntityType="Self.PriceOffer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecommandPurchaseItems" EntityType="Self.RecommandPurchaseItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleList" EntityType="Self.VehicleList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleMaintenance" EntityType="Self.VehicleMaintenance" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Customers__emplo__286302EC" Association="Self.FK__Customers__emplo__286302EC">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___emplo__36B12243" Association="Self.FK__Employee___emplo__36B12243">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Employee_Position_Junction" EntitySet="Employee_Position_Junction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___posit__37A5467C" Association="Self.FK__Employee___posit__37A5467C">
+      <End Role="EmployeePosition" EntitySet="EmployeePosition" />
+      <End Role="Employee_Position_Junction" EntitySet="Employee_Position_Junction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GreenCons__emplo__31EC6D26" Association="Self.FK__GreenCons__emplo__31EC6D26">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="GreenConstraints" EntitySet="GreenConstraints" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GreenEven__clien__2C3393D0" Association="Self.FK__GreenEven__clien__2C3393D0">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="GreenEvents" EntitySet="GreenEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GreenEven__emplo__2B3F6F97" Association="Self.FK__GreenEven__emplo__2B3F6F97">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="GreenEvents" EntitySet="GreenEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__emplo__3E52440B" Association="Self.FK__Inventory__emplo__3E52440B">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="InventoryItems" EntitySet="InventoryItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__emplo__4316F928" Association="Self.FK__Inventory__emplo__4316F928">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="InventoryCategories" EntitySet="InventoryCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__event__3F466844" Association="Self.FK__Inventory__event__3F466844">
+      <End Role="GreenEvents" EntitySet="GreenEvents" />
+      <End Role="InventoryItems" EntitySet="InventoryItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__offer__403A8C7D" Association="Self.FK__Inventory__offer__403A8C7D">
+      <End Role="PriceOffer" EntitySet="PriceOffer" />
+      <End Role="InventoryItems" EntitySet="InventoryItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PriceOffe__emplo__3A81B327" Association="Self.FK__PriceOffe__emplo__3A81B327">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="PriceOffer" EntitySet="PriceOffer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PriceOffe__event__3B75D760" Association="Self.FK__PriceOffe__event__3B75D760">
+      <End Role="GreenEvents" EntitySet="GreenEvents" />
+      <End Role="PriceOffer" EntitySet="PriceOffer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Recommand__itemS__45F365D3" Association="Self.FK__Recommand__itemS__45F365D3">
+      <End Role="InventoryItems" EntitySet="InventoryItems" />
+      <End Role="RecommandPurchaseItems" EntitySet="RecommandPurchaseItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Supplier__employ__2F10007B" Association="Self.FK__Supplier__employ__2F10007B">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Supplier" EntitySet="Supplier" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VehicleLi__emplo__48CFD27E" Association="Self.FK__VehicleLi__emplo__48CFD27E">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="VehicleList" EntitySet="VehicleList" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VehicleLi__event__49C3F6B7" Association="Self.FK__VehicleLi__event__49C3F6B7">
+      <End Role="GreenEvents" EntitySet="GreenEvents" />
+      <End Role="VehicleList" EntitySet="VehicleList" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VehicleMa__vehic__4CA06362" Association="Self.FK__VehicleMa__vehic__4CA06362">
+      <End Role="VehicleList" EntitySet="VehicleList" />
+      <End Role="VehicleMaintenance" EntitySet="VehicleMaintenance" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
